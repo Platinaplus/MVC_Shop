@@ -1,0 +1,164 @@
+ul[class] {
+    list-style: none;
+}
+
+a[class] {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    font-size: 72px;
+    letter-spacing: 6px;
+    margin-bottom: 0;
+}
+
+h2 {
+    font-size: 50px;
+    font-style: italic;
+    letter-spacing: 6px;
+    margin-top: 0;
+}
+
+.container {
+    width: 100%;
+    height: calc(100vh - 66px);
+    background-image: url("../img/bg.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.container__inner {
+    max-width: 1290px;
+    padding: 0 15px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+}
+.container__inner.home{
+    height: 100%;
+    align-items: flex-end;
+}
+
+nav {
+    background-color: #cccccc;
+}
+
+.menu {
+    display: flex;
+    column-gap: 30px;
+    justify-content: flex-end;
+    padding: 20px 15px;
+    max-width: 1290px;
+    margin: 0 auto;
+}
+
+.menu__link {
+    color: #000;
+    transition: .3s;
+    font-size: 22px;
+}
+
+.menu__link.login {
+    color: blue;
+}
+
+.menu__link:hover {
+    color: #45a049;
+}
+
+.menu__link svg {
+    width: 30px;
+    height: 30px;
+    transition: .3s;
+}
+
+.menu__link path {
+    transition: .3s;
+}
+
+.menu__link svg:hover path {
+    stroke: red;
+}
+.menu__link svg.heart:hover path {
+    fill: red;
+}
+
+.button {
+    background-color: #000000; /* Button background color */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    border-radius: 8px; /* Corner rounding */
+    cursor: pointer;
+    transition: .3s;
+    width: 100px;
+}
+
+.button:hover {
+    background-color: #45a049; /* Button background color when hovering */
+}
+
+.form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+label {
+    margin-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 450px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 30px;
+}
+
+.form__buttons {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.subtitle {
+    font-style: normal;
+    letter-spacing: normal;
+    margin-top: 20px;
+}
+
+.user {
+    width: 160px;
+}

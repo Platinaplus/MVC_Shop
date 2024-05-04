@@ -1,85 +1,53 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Регистрация аккаунта</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-image: url('/img/bg.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
-
-        .container {
-            width: 50%;
-            margin: 0 auto;
-            padding-top: 50px;
-            text-align: center;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: bold;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <link th:href="@{/styles/style.css}" rel="stylesheet"/>
+    <title>Account registration</title>
 </head>
 <body>
+<nav>
+    <ul class="menu">
+        <li><a class="menu__link" href="/index">Welcome</a></li>
+    </ul>
+</nav>
 <div class="container">
-    <h1>Регистрация аккаунта</h1>
-    <form action="#" th:action="@{/registration}" th:object="${user}" method="post">
-        <div class="form-group">
-            <label for="login">Логин:</label>
-            <input type="text" id="login" th:field="*{username}" placeholder="Введите ваш логин"> <!-- Thymeleaf атрибуты для привязки полей к объекту User -->
-        </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" th:field="*{email}" placeholder="Введите ваш email">
-        </div>
-        <div class="form-group">
-            <label for="phone">Номер телефона:</label>
-            <input type="tel" id="phone" th:field="*{phoneNumber}" placeholder="Введите ваш номер телефона">
-        </div>
-        <div class="form-group">
-            <label for="password">Пароль:</label>
-            <input type="password" id="password" th:field="*{password}" placeholder="Введите ваш пароль">
-        </div>
-        <div class="form-group">
-            <label for="confirm-password">Повторите пароль:</label>
-            <input type="password" id="confirm-password" name="confirmPassword" placeholder="Повторите ваш пароль">
-        </div>
-
-        <button type="submit" class="button">Регистрация</button> <!-- Кнопка отправки формы -->
-        <a href="/forgot-password">Забыли пароль?</a>
-    </form>
+    <div class="container__inner">
+        <h2 class="subtitle">Create an account</h2>
+        <form class="form" action="#" th:action="@{/registration}" th:object="${user}" method="post">
+            <div class="form__content">
+                <div class="form-group">
+                    <label for="login">Name:</label>
+                    <input type="text" id="login" th:field="*{username}" placeholder="Enter you name:">
+                    <!-- Thymeleaf attributes to bind fields to the User object -->
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" th:field="*{email}" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone number:</label>
+                    <input type="tel" id="phone" th:field="*{phoneNumber}" placeholder="Enter your phone number">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" th:field="*{password}" placeholder="Enter your password">
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Duplicate password:</label>
+                    <input type="password" id="confirm-password" name="confirmPassword"
+                           placeholder="Duplicate your password">
+                </div>
+                <p th:if="${error_text} " th:text="${error_text}"></p>
+            </div>
+            <div class="form__buttons">
+                <button type="submit" class="button">Sign up</button>
+                <div>Already have an account?</div>
+                <a href="/login" class="menu__link login">Log in</a>
+            </div>
+        </form>
+    </div>
 </div>
 </body>
 </html>

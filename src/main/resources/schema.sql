@@ -1,4 +1,4 @@
--- Создание таблицы пользователей
+-- Г‘Г®Г§Г¤Г Г­ГЁГҐ ГІГ ГЎГ«ГЁГ¶Г» ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«ГҐГ©
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     username VARCHAR(100) NOT NULL,
@@ -8,14 +8,14 @@ CREATE TABLE users (
     is_admin BOOLEAN NOT NULL
 );
 
--- Создание таблицы товаров
+-- Г‘Г®Г§Г¤Г Г­ГЁГҐ ГІГ ГЎГ«ГЁГ¶Г» ГІГ®ГўГ Г°Г®Гў
 CREATE TABLE items (
    item_id SERIAL PRIMARY KEY,
    name VARCHAR(100) NOT NULL,
    price DECIMAL(10, 2) NOT NULL
 );
 
--- Создание таблицы корзины пользователя
+-- Г‘Г®Г§Г¤Г Г­ГЁГҐ ГІГ ГЎГ«ГЁГ¶Г» ГЄГ®Г°Г§ГЁГ­Г» ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гї
 CREATE TABLE user_cart (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(user_id) NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE user_cart (
     CONSTRAINT fk_user_cart_item FOREIGN KEY (item_id) REFERENCES items(item_id)
 );
 
--- Создание таблицы истории покупок
+-- Г‘Г®Г§Г¤Г Г­ГЁГҐ ГІГ ГЎГ«ГЁГ¶Г» ГЁГ±ГІГ®Г°ГЁГЁ ГЇГ®ГЄГіГЇГ®ГЄ
 CREATE TABLE purchase_history (
    id SERIAL PRIMARY KEY,
    user_id INT REFERENCES users(user_id) NOT NULL,

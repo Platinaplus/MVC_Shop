@@ -4,91 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        form label {
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        form input[type="text"],
-        form input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        form button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        form button:hover {
-            background-color: #0056b3;
-        }
-
-        .options {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .options a {
-            margin: 0 10px;
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        .options a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link th:href="@{/styles/style.css}" rel="stylesheet"/>
 </head>
 <body>
+<nav>
+    <ul class="menu">
+        <li><a class="menu__link" href="/registration">Register</a></li>
+        <li><a class="menu__link" href="/forgot-password">Forgot Password</a></li>
+    </ul>
+</nav>
 <div class="container">
-    <h1>Login Page</h1>
-    <form action="/login" method="post">
-        <div>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <button type="submit">Login</button>
-    </form>
-    <div class="options">
-        <a href="/registration">Register</a>
-        <a href="/forgot-password">Forgot Password</a>
+    <div class="container__inner">
+        <h2 class="subtitle">Log in</h2>
+        <form action="/login" method="post">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required placeholder="Enter your login">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required placeholder="Enter your password">
+            </div>
+            <button class="button" type="submit">Login</button>
+        </form>
     </div>
 </div>
 </body>
