@@ -6,9 +6,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
-
-
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
@@ -21,16 +18,14 @@ public class SecurityConfiguration {
                 //.csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests((authorizeHttpRequests) ->
                         authorizeHttpRequests
-                                .requestMatchers("/index").permitAll()
+                                // specify which pages should not be protected by authentication
+                                .requestMatchers("/index", "/", "/about", "/logout", "/registration", "/forgot-password").permitAll()
                                 .requestMatchers("styles/style.css").permitAll()
                                 .requestMatchers("/img/*").permitAll()
 
                                 // specify which pages should be protected by authentication
                                 .requestMatchers("/admin").hasRole("USER")
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
-                                // specify which pages should not be protected by authentication
-                                .requestMatchers("/authentication", "/logout", "/registration", "/index","/forgot-password")
-                                .permitAll()
                                 // any pages not described in the matchers above
                                 // will be available to users with user and admin roles
                                 .anyRequest()

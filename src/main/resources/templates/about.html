@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>About</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<nav>
+    <ul class="menu">
+        <li><a class="menu__link" th:href="@{/login}" href="/login">Log in</a></li>
+        <li><a class="menu__link" th:href="@{/}">Welcome</a></li>
+    </ul>
+</nav>
+<div class="container about">
+    <div class="container__inner">
+        <div class="content about">
+            <h1>About us</h1>
+            <p>This Thymeleaf template presents a form that captures a username and password and posts them to /login.
+                As configured, Spring Security provides a filter that intercepts that request and authenticates the
+                user. If the user fails to authenticate, the page is redirected to /login?error, and your page displays
+                the appropriate error message. Upon successfully signing out, your application is sent to /login?logout,
+                and your page displays the appropriate success message. </p>
+        </div>
+    </div>
+</div>
+<footer>
+    <ul class="menu about">
+        <li><a class="menu__link" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-label="Instagram"
+                 role="img" viewBox="0 0 512 512" fill="#000000">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <rect width="512" height="512" rx="15%" id="b"></rect>
+                    <use fill="url(#a)" xlink:href="#b"></use>
+                    <use fill="url(#c)" xlink:href="#b"></use>
+                    <radialGradient id="a" cx=".4" cy="1" r="1">
+                        <stop offset=".1" stop-color="#fd5"></stop>
+                        <stop offset=".5" stop-color="#ff543e"></stop>
+                        <stop offset="1" stop-color="#c837ab"></stop>
+                    </radialGradient>
+                    <linearGradient id="c" x2=".2" y2="1">
+                        <stop offset=".1" stop-color="#3771c8"></stop>
+                        <stop offset=".5" stop-color="#60f" stop-opacity="0"></stop>
+                    </linearGradient>
+                    <g fill="none" stroke="#ffffff" stroke-width="30">
+                        <rect width="308" height="308" x="102" y="102" rx="81"></rect>
+                        <circle cx="256" cy="256" r="72"></circle>
+                        <circle cx="347" cy="165" r="6"></circle>
+                    </g>
+                </g>
+            </svg>
+        </a></li>
+        <li class="menu__link">
+            <span>+7 937 213 67 32</span>
+        </li>
+        <li><a class="menu__link" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-label="VK" role="img" viewBox="0 0 512 512" fill="#000000">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <rect width="512" height="512" rx="15%" fill="#5281b8"></rect>
+                    <path fill="#ffffff"
+                          d="M274 363c5-1 14-3 14-15 0 0-1-30 13-34s32 29 51 42c14 9 25 8 25 8l51-1s26-2 14-23c-1-2-9-15-39-42-31-30-26-25 11-76 23-31 33-50 30-57-4-7-20-6-20-6h-57c-6 0-9 1-12 6 0 0-9 25-21 45-25 43-35 45-40 42-9-5-7-24-7-37 0-45 7-61-13-65-13-2-59-4-73 3-7 4-11 11-8 12 3 0 12 1 17 7 8 13 9 75-2 81-15 11-53-62-62-86-2-6-5-7-12-9H79c-6 0-15 1-11 13 27 56 83 193 184 192z"></path>
+                </g>
+            </svg>
+        </a></li>
+    </ul>
+</footer>
+</body>
+</html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,15 +28,12 @@
                           stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                 </g>
             </svg>
-            <span class="contacts">Name:</span><span th:text="*{username}" class="contacts"></span>
-            <span class="contacts">Phone number:</span><span th:text="*{phone_number}" class="contacts"></span>
-            <span class="contacts">Name:</span><span th:text="*{username}" class="contacts"></span>
         </a></li>
     </ul>
 </nav>
 <div class="container">
     <div class="container__inner">
-        <h2 class="subtitle">Account</h2>
+        <h2 class="subtitle" th:text="Hello ${username}">Hello</h2>
         <div class="user">
             <svg fill="#000000" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>

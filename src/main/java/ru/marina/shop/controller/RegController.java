@@ -31,9 +31,8 @@ public class RegController {
     }
 
     @PostMapping("/registration")
-    public String registerUser(Model model ,@ModelAttribute("user") @Valid User user, BindingResult bindingResult, @RequestParam("confirmPassword") String confirmPassword, @RequestParam("phoneNumber") String phoneNumber) {
+    public String registerUser(Model model ,@ModelAttribute("user") @Valid User user, BindingResult bindingResult, @RequestParam("confirmPassword") String confirmPassword) {
 
-        System.out.println(phoneNumber);
         if (bindingResult.hasErrors()) {
             // If there are validation errors, handle them here
             // For example, you can add them to the model and return a registration page with errors
