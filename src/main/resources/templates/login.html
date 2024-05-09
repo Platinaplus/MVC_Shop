@@ -9,21 +9,24 @@
 <body>
 <nav>
     <ul class="menu">
-        <li><a class="menu__link" href="/registration">Register</a></li>
-        <li><a class="menu__link" href="/forgot-password">Forgot Password</a></li>
+        <li><a class="menu__link" th:href="@{/registration}">Register</a></li>
+        <li><a class="menu__link" th:href="@{/forgot-password}">Forgot Password</a></li>
+        <li><a class="menu__link" th:href="@{/}">Welcome</a></li>
     </ul>
 </nav>
 <div class="container">
     <div class="container__inner">
         <h2 class="subtitle">Log in</h2>
-        <form th:action="@{/login}" method="post">
+        <div class="error" th:if="${error}" th:text="${error}">error</div>
+        <div class="error" th:if="${message}" th:text="${message}">message</div>
+        <form th:action="@{/login}" method="post" th:object="${user}">
             <div class="form-group">
                 <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required placeholder="Enter your login">
+                <input type="text" th:field="*{username}" id="username" name="username" required placeholder="Enter your login">
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required placeholder="Enter your password">
+                <input type="password" id="password" th:field="*{password}" name="password" required placeholder="Enter your password">
             </div>
             <button class="button" type="submit">Login</button>
         </form>

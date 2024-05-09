@@ -2,9 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Product</title>
+    <title>Admin</title>
 </head>
 <body>
-PRODUCT PAGE
+    <div th:if="${pageContext.request.userPrincipal.name != null}"></div>
 </body>
 </html>

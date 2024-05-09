@@ -4,29 +4,27 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import org.springframework.ui.Model;
-
-
-import org.springframework.security.access.prepost.PreAuthorize;
-
+import ru.marina.shop.entity.User;
+import ru.marina.shop.repository.UserRepository;
 
 @Controller
 public class LkController {
 
+    private final UserRepository userRepository;
+
+    public LkController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @GetMapping("/lk")
-    @PreAuthorize("isAuthenticated()")
     public String loginPage(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        // Checking if the user is authenticated
         if (authentication != null && authentication.isAuthenticated()) {
-            // If the user is authenticated, get his name
             String username = authentication.getName();
-            // Passing the user name to the model
-            model.addAttribute("username", username);
+            User user = userRepository.findByUsername(username);
+            model.addAttribute("user", user);
         }
-
         return "lk"; // HTML page template name
     }
 }

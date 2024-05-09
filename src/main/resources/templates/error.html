@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error</title>
+  <link th:href="@{/styles/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<nav>
+  <ul class="menu"></ul>
+</nav>
+<div class="container">
+  <div class="container__inner home">
+    <div class="content">
+      <h1>Ooops....</h1>
+      <h2>Page not found</h2>
+      <a th:href="@{/}" class="button">Home page</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

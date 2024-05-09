@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +21,7 @@
                 </g>
             </svg>
         </a></li>
-        <li><a class="menu__link" href="/cart">
+        <li><a class="menu__link" th:href="@{/cart}">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -29,20 +31,44 @@
                 </g>
             </svg>
         </a></li>
+        <li><a class="menu__link" th:href="@{/}">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <path d="M9 16C9.85038 16.6303 10.8846 17 12 17C13.1154 17 14.1496 16.6303 15 16" stroke="#1C274C"
+                          stroke-width="2.016" stroke-linecap="round"></path>
+                    <path d="M22 12.2039V13.725C22 17.6258 22 19.5763 20.8284 20.7881C19.6569 22 17.7712 22 14 22H10C6.22876 22 4.34315 22 3.17157 20.7881C2 19.5763 2 17.6258 2 13.725V12.2039C2 9.91549 2 8.77128 2.5192 7.82274C3.0384 6.87421 3.98695 6.28551 5.88403 5.10813L7.88403 3.86687C9.88939 2.62229 10.8921 2 12 2C13.1079 2 14.1106 2.62229 16.116 3.86687L18.116 5.10812C20.0131 6.28551 20.9616 6.87421 21.4808 7.82274"
+                          stroke="#1C274C" stroke-width="2.016" stroke-linecap="round"></path>
+                </g>
+            </svg>
+        </a></li>
     </ul>
 </nav>
 <div class="container">
-    <div class="container__inner">
-        <h2 class="subtitle" th:text="Hello ${username}">Hello</h2>
+    <div class="container__inner lk">
+        <h2 class="subtitle" th:text="${'Hello' + ', ' + user.getUsername()}">Hello</h2>
         <div class="user">
-            <svg fill="#000000" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="#000000">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                <g id="SVGRepo_iconCarrier"><title>user</title>
-                    <path d="M4 28q0 0.832 0.576 1.44t1.44 0.576h20q0.8 0 1.408-0.576t0.576-1.44q0-1.44-0.672-2.912t-1.76-2.624-2.496-2.144-2.88-1.504q1.76-1.088 2.784-2.912t1.024-3.904v-1.984q0-3.328-2.336-5.664t-5.664-2.336-5.664 2.336-2.336 5.664v1.984q0 2.112 1.024 3.904t2.784 2.912q-1.504 0.544-2.88 1.504t-2.496 2.144-1.76 2.624-0.672 2.912z"></path>
+                <g id="SVGRepo_iconCarrier">
+                    <path fill="#000000"
+                          d="M628.736 528.896A416 416 0 0 1 928 928H96a415.872 415.872 0 0 1 299.264-399.104L512 704l116.736-175.104zM720 304a208 208 0 1 1-416 0 208 208 0 0 1 416 0z"></path>
                 </g>
             </svg>
         </div>
+        <ul class="contact">
+            <li class="contact__item">
+                <span>Email: </span><span th:text="${'email:'+' '+ user.getEmail()}"></span>
+            </li>
+            <li class="contact__item">
+                <span>Phone number: </span><span th:text="${'tel:'+' '+ user.getPhoneNumber()}"></span>
+            </li>
+        </ul>
+        <form th:action="@{/logout}" method="post">
+            <input class="button" type="submit" value="Logout">
+        </form>
     </div>
 </div>
 </body>
