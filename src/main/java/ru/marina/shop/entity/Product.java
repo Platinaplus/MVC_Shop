@@ -2,15 +2,13 @@ package ru.marina.shop.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
+import lombok.*;
 
 @Entity
-@Table(name = "items")
-public class Item {
+@Getter
+@Setter
+@Table(name = "products")
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
@@ -22,5 +20,9 @@ public class Item {
     @Column(name = "price", nullable = false)
     private double price;
 
-    // Getters and setters
+    @Column(name = "category", nullable = false)
+    private String category;
+
+    @Column(name = "image", nullable = false)
+    private String image;
 }

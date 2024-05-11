@@ -62,7 +62,7 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorizeHttpRequests) ->
                         authorizeHttpRequests
-                                .requestMatchers("/index", "/", "/about", "/login", "/registration", "/forgot-password", "/styles/*", "/img/*").permitAll()
+                                .requestMatchers("/index", "/", "/about", "/login", "/catalog", "/catalog/*", "/registration", "/forgot-password", "/styles/*", "/img/*").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin((formLogin) ->
@@ -73,10 +73,5 @@ public class SecurityConfiguration {
                 )
                 .logout(LogoutConfigurer::permitAll);
         return http.build();
-    }
-
-    @Autowired
-    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(encoder());
     }
 }

@@ -5,30 +5,20 @@ CREATE TABLE users
     username     VARCHAR(100)        NOT NULL,
     password     VARCHAR(100)        NOT NULL,
     email        VARCHAR(100) UNIQUE NOT NULL,
-    phone_number VARCHAR(20)
+    phone_number VARCHAR(20),
+    role         VARCHAR(15)
 );
-
-CREATE TABLE roles
-(
-    role_id SERIAL PRIMARY KEY,
-    name    VARCHAR(100) NOT NULL
-);
-
-CREATE TABLE user_roles
-(
-    u_id INT UNIQUE NOT NULL,
-    r_id INT NOT NULL,
-
-    FOREIGN KEY (u_id) REFERENCES users (user_id),
-    FOREIGN KEY (r_id) REFERENCES roles (role_id)
-);
-
 -- Ñîçäàíèå òàáëèöû òîâàðîâ
-CREATE TABLE items
+CREATE TABLE products
 (
-    item_id SERIAL PRIMARY KEY,
+    product_id SERIAL PRIMARY KEY,
     name    VARCHAR(100)   NOT NULL,
-    price   DECIMAL(10, 2) NOT NULL
+    price   DECIMAL(10, 2) NOT NULL,
+    category VARCHAR(100)   NOT NULL,
+    image VARCHAR(100)   NOT NULL,
+    length VARCHAR(100),
+    width VARCHAR(100),
+    material VARCHAR(100)
 );
 
 -- Ñîçäàíèå òàáëèöû êîðçèíû ïîëüçîâàòåëÿ
@@ -36,10 +26,10 @@ CREATE TABLE user_cart
 (
     id       SERIAL PRIMARY KEY,
     user_id  INT REFERENCES users (user_id) NOT NULL,
-    item_id  INT REFERENCES items (item_id) NOT NULL,
+    item_id  INT REFERENCES products (product_id) NOT NULL,
     quantity INT                            NOT NULL,
     CONSTRAINT fk_user_cart_user FOREIGN KEY (user_id) REFERENCES users (user_id),
-    CONSTRAINT fk_user_cart_item FOREIGN KEY (item_id) REFERENCES items (item_id)
+    CONSTRAINT fk_user_cart_item FOREIGN KEY (item_id) REFERENCES products (product_id)
 );
 
 -- Ñîçäàíèå òàáëèöû èñòîðèè ïîêóïîê
@@ -47,12 +37,8 @@ CREATE TABLE purchase_history
 (
     id            SERIAL PRIMARY KEY,
     user_id       INT REFERENCES users (user_id)      NOT NULL,
-    item_id       INT REFERENCES items (item_id)      NOT NULL,
+    item_id       INT REFERENCES products (product_id)      NOT NULL,
     purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     CONSTRAINT fk_purchase_history_user FOREIGN KEY (user_id) REFERENCES users (user_id),
-    CONSTRAINT fk_purchase_history_item FOREIGN KEY (item_id) REFERENCES items (item_id)
+    CONSTRAINT fk_purchase_history_item FOREIGN KEY (item_id) REFERENCES products (product_id)
 );
-
---Insert data
-INSERT INTO roles VALUES (1, 'ROLE_USER');
-INSERT INTO roles VALUES (2, 'ROLE_ADMIN');

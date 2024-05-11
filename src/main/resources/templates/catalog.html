@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Catalog</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:insert="~{parts/catalog-header :: catalog-header}"></div>
+<div class="container">
+    <div class="container__catalog">
+        <div class="content__catalog">
+            <div class="content-img">
+                <a th:href="@{/catalog/brooches}">
+                    <span class="menu__link">Brooches</span>
+                    <img th:src="@{'/img/brooche.jpg'}" alt="hand made jewelry">
+                </a>
+            </div>
+        </div>
+        <div class="content__catalog">
+            <div class="content-img">
+                <a th:href="@{/catalog/torniquets}">
+                    <span class="menu__link">Tourniquets</span>
+                    <img th:src="@{'/img/jew.jpg'}" alt="hand made jewelry">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:insert="~{parts/footer :: footer}"></div>
+</body>
+</html>

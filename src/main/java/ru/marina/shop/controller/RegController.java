@@ -41,13 +41,9 @@ public class RegController {
             model.addAttribute("error_text","Passwords do not match");
             return "registration";
         }
-        if (!userService.addUser(user)){
-            model.addAttribute("error_text", "Such user already exist");
-            return "registration";
-        }
-        securityService.autoLogin(user.getUsername(), user.getPassword());
 
-        Logger.getLogger(RegController.class.getName()).info(String.format("Auto login %s", user.getUsername()));
+        userService.addUser(user);
+        securityService.autoLogin(user.getUsername(), user.getPassword());
 
         return "redirect:/lk"; // Redirects to the login page after successful registration
     }

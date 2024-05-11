@@ -6,7 +6,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
@@ -29,10 +28,8 @@ public class User implements UserDetails {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @ManyToMany
-    @JoinTable(name="user_roles", joinColumns = @JoinColumn(name="u_id"),
-            inverseJoinColumns = @JoinColumn(name="r_id"))
-    private Set<Role> roles;
+    @Column(name = "role")
+    private Role role;
 
     @Transient
     private String confirmPassword;

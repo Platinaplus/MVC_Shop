@@ -18,7 +18,7 @@ public class PurchaseHistory {
 
     @ManyToOne
     @JoinColumn(name = "item_id", nullable = false)
-    private Item item;
+    private Product product;
 
     @Column(name = "purchase_date", nullable = false)
     private Timestamp purchaseDate;

@@ -10,12 +10,11 @@
 <nav>
     <ul class="menu">
         <li><a class="menu__link" th:href="@{/registration}">Register</a></li>
-        <li><a class="menu__link" th:href="@{/forgot-password}">Forgot Password</a></li>
         <li><a class="menu__link" th:href="@{/}">Welcome</a></li>
     </ul>
 </nav>
 <div class="container">
-    <div class="container__inner">
+    <div class="container__inner login">
         <h2 class="subtitle">Log in</h2>
         <div class="error" th:if="${error}" th:text="${error}">error</div>
         <div class="error" th:if="${message}" th:text="${message}">message</div>
@@ -30,6 +29,10 @@
             </div>
             <button class="button" type="submit">Login</button>
         </form>
+        <div class="form__buttons login">
+            <div>Forgot password?</div>
+            <a th:href="@{/forgot-password}" class="menu__link login blue">Reset my password</a>
+        </div>
     </div>
 </div>
 </body>
