@@ -1,10 +1,16 @@
-<nav th:fragment="catalog-header" class="catalog">
+<nav th:fragment="catalog-header (category)" class="catalog">
   <ul class="menu menu-left">
-    <li class="menu__product"><a class="menu__link" th:href="@{/catalog/brooches}">
+    <li th:if="${category != 'brooches'}" class="menu__product"><a class="menu__link" th:href="@{/catalog/brooches}">
       Brooches
     </a></li>
-    <li class="menu__product"><a class="menu__link" th:href="@{/catalog/torniquets}">
+    <li th:if="${category != 'tourniquets'}" class="menu__product"><a class="menu__link" th:href="@{/catalog/tourniquets}">
       Tourniquets
+    </a></li>
+    <li th:if="${category != 'all'}" class="menu__product"><a class="menu__link" th:href="@{/catalog/all}">
+      See All
+    </a></li>
+    <li th:if="${category != 'root'}" class="menu__product"><a class="menu__link" th:href="@{/catalog}">
+      Catalog
     </a></li>
   </ul>
   <ul class="menu">

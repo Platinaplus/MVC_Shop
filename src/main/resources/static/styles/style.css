@@ -9,7 +9,11 @@ a {
     vertical-align: middle;
 }
 
-svg path{
+p {
+    margin: 0;
+}
+
+svg path, a {
     transition: .3s;
 }
 
@@ -73,8 +77,7 @@ h2 {
 .container__products {
     display: flex;
     padding: 30px;
-    justify-content: space-between;
-    gap: 30px;
+    gap: 40px;
 }
 
 .content__catalog {
@@ -88,17 +91,20 @@ h2 {
     background-color: black;
     color: #fff;
     font-size: 20px;
-    box-shadow: 10px 10px 13px 0 rgba(18,17,18,1);
+    box-shadow: 10px 10px 13px 0 rgba(18, 17, 18, 1);
     transition: .3s;
 }
 
 .content__product img {
     width: 300px;
     height: 300px;
+    object-fit: cover;
 }
 
 .card {
     display: block;
+    height: 300px;
+    width: 300px;
 }
 
 .content__catalog span {
@@ -140,7 +146,7 @@ h2 {
 }
 
 .container__inner.login {
-    padding-left: 100px;
+    max-width: 50%;
 }
 
 .container__inner.catalog {
@@ -152,8 +158,7 @@ nav, footer {
 }
 
 nav.catalog {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
     padding: 0 50px;
 }
 
@@ -202,7 +207,7 @@ nav.catalog {
     height: 40px;
 }
 
-.menu__link svg:hover path {
+.menu__link svg:not(.heart):hover path {
     stroke: red;
 }
 
@@ -232,7 +237,6 @@ nav.catalog {
 .form {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
 }
 
 label {
@@ -240,12 +244,20 @@ label {
 }
 
 .form-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    grid-row-gap: 50px;
+}
+
+.form-group:not(:last-child) {
     margin-bottom: 20px;
 }
 
 .form-group label {
     display: block;
     font-weight: bold;
+    font-size: 22px;
 }
 
 .form-group input {
@@ -254,6 +266,15 @@ label {
     border: 1px solid #ccc;
     border-radius: 5px;
     height: 30px;
+}
+
+.form-group select {
+    width: 472px;
+    height: 52px;
+    padding: 10px;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 .form__buttons {
@@ -303,10 +324,14 @@ label {
     font-size: 24px;
 }
 
-.error {
+.error, .success {
     color: red;
     font-size: 20px;
     margin-bottom: 40px;
+}
+
+.success {
+    color: #45a049;
 }
 
 .action__product {
@@ -335,10 +360,38 @@ label {
 button.action__product {
     position: absolute;
     right: 20px;
-    bottom: 12px;
+    bottom: 25px;
 }
 
 .description {
     padding: 20px;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+.admin {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 15px;
+}
+
+.edit, .delete {
+    color: antiquewhite;
+}
+
+.edit, .delete {
+    color: antiquewhite;
+}
+
+.edit:hover, .delete:hover {
+    color: red;
+}
+
+.admin-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
