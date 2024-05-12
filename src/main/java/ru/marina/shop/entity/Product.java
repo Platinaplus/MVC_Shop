@@ -15,7 +15,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
-    private int itemId;
+    private Long itemId;
 
     @NotEmpty(message = "The name is required")
     @Column(name = "name", nullable = false)
@@ -25,19 +25,19 @@ public class Product {
     @Column(name = "price", nullable = false)
     private double price;
 
-    @NotEmpty(message = "The name is required")
+    @NotEmpty(message = "The category is required")
     @Column(name = "category", nullable = false)
     private String category;
 
-    @Column(name = "image", nullable = false)
+    @Column(name = "image")
     private String image;
 
-    @Column(name = "length", nullable = false)
+    @Column(name = "length")
     private String length;
 
-    @Column(name = "width", nullable = false)
+    @Column(name = "width")
     private String width;
 
-    @Column(name = "material", nullable = false)
+    @Column(name = "material")
     private String material;
 }

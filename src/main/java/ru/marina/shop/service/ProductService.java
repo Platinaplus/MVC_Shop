@@ -21,7 +21,13 @@ public class ProductService {
         return productRepository.getProductsByCategory(category);
     }
 
-    public void createProduct(Product product) {
+    public Product getProductById(Long id) {
+        return productRepository.getReferenceById(id);
+    }
+
+    public void saveProduct(Product product) {
         productRepository.save(product);
     }
+
+    public void deleteProductById(Long id) { productRepository.deleteById(id); }
 }

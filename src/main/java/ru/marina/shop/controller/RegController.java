@@ -10,13 +10,6 @@ import ru.marina.shop.entity.User;
 import ru.marina.shop.service.SecurityService;
 import ru.marina.shop.service.UserService;
 
-import java.util.logging.Logger;
-//@RequestParam("confirmPassword") String confirmPassword:
-// This parameter is used to retrieve the confirmation password value from the query.
-
-// The @RequestParam("confirmPassword") annotation specifies,
-// that the value should be extracted from the request parameter named "confirmPassword" and converted to a string.
-
 @Controller
 @RequiredArgsConstructor
 public class RegController {
@@ -35,7 +28,7 @@ public class RegController {
 
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(error -> System.out.println(error.getDefaultMessage()));
-            return "registration"; // Title of the page with the registration form
+            return "registration";
         }
         if (!confirmPassword.equals(user.getPassword())){
             model.addAttribute("error_text","Passwords do not match");
@@ -43,8 +36,9 @@ public class RegController {
         }
 
         userService.addUser(user);
-        securityService.autoLogin(user.getUsername(), user.getPassword());
 
-        return "redirect:/lk"; // Redirects to the login page after successful registration
+        //securityService.autoLogin(user.getUsername(), user.getPassword()); // TODO: need to fix this method
+
+        return "redirect:/catalog";
     }
 }

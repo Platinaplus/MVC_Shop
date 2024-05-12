@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product details</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:insert="~{parts/catalog-header :: catalog-header(category='create')}"></div>
+<div class="container">
+    <div class="container__details">
+        <div class="details__img">
+            <img th:src="${product.image}" th:alt="${product.name}">
+        </div>
+        <div class="details__description">
+            <div class="details__content">
+                <h2 class="title" th:text="${product.name}"></h2>
+                <div class="text">
+                    <span>Price:</span>
+                    <span th:text="'&#8364; ' + ${product.price}"></span>
+                </div>
+                <div class="text">
+                    <span>Length:</span>
+                    <span th:text="${product.length}"></span>
+                </div>
+                <div class="text">
+                    <span>Width:</span>
+                    <span th:text="${product.width}"></span>
+                </div>
+                <div class="text">
+                    <span>Materials:</span>
+                    <span th:text="${product.material}"></span>
+                </div>
+            </div>
+            <form th:action="@{'catalog/like?id=' + ${product.itemId}}" method="post">
+                <button class="button details" type="submit">Add to wishlist</button>
+            </form>
+            <form th:action="@{'catalog/add-to-card?id=' + ${product.itemId}}" method="post">
+                <button class="button details" type="submit">Add to cart</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

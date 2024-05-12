@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Products</title>
@@ -8,17 +8,17 @@
 <body>
 <div th:insert="~{parts/catalog-header :: catalog-header(category=${category})}"></div>
 <div class="container">
-    <div class="admin-btn">
+    <div sec:authorize="hasRole('ADMIN')" class="admin-btn">
         <a th:href="@{/catalog/createProduct}" class="button">Create new product</a>
     </div>
     <div class="container__products">
         <div th:each="product: ${products}" class="content__product">
-            <a class="card" th:href="@{'/catalog/' + ${product.itemId}}">
+            <a class="card" th:href="@{'/catalog/product?id=' + ${product.itemId}}">
                 <img th:src="@{${product.image}}" alt="hand made jewelry">
             </a>
-            <div class="admin">
-                <a th:href="@{catalog/products/edit(id=${product.itemId})}" class="edit">Edit</a>
-                <a th:href="@{catalog/products/delete(id=${product.itemId})}" class="delete">Delete</a>
+            <div sec:authorize="hasRole('ADMIN')" class="admin">
+                <a th:href="@{'/catalog/product/edit?id=' + ${product.itemId}}" class="edit">Edit</a>
+                <a th:href="@{'/catalog/product/delete?id=' + ${product.itemId}}" onclick="return confirm('Are you sure?')" class="delete">Delete</a>
             </div>
             <div class="description">
                 <p th:text="${product.name}">Popcorn</p>

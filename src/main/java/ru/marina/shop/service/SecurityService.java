@@ -29,6 +29,8 @@ public class SecurityService {
         return null;
     }
 
+    //TODO: Fix autoLogin method in order to provide user with access after registration automatically
+
     public void autoLogin(String username, String password) {
         UserDetails userDetails = userService.loadUserByUsername(username);
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());

@@ -9,48 +9,48 @@
 <div th:insert="~{parts/catalog-header :: catalog-header(category='create')}"></div>
 <div class="container">
     <div class="container__inner">
-        <h2 class="subtitle">Create a new product</h2>
-        <div th:if="${success}" class="success">Product was successfully created!</div>
-        <form class="form" th:action="@{/catalog/createProduct}" th:object="${product}" method="post">
+        <h2 class="subtitle"  th:text="${mode == 'edit' ? 'Edit product' : 'Create a new product'}"></h2>
+        <div th:if="${success}" th:text="${mode == 'edit' ? 'Product was successfully updated!' : 'Product was successfully created!'}" class="success"></div>
+        <form class="form" th:action="@{${mode == 'edit' ? ('/catalog/product/edit?id='+product.itemId) :  '/catalog/createProduct'}}" th:object="${product}" method="post">
             <div class="form__content">
-                <div class="form-group">
+                <div class="form-group create-product">
                     <label for="login">Title:</label>
                     <input type="text" id="login" th:field="*{name}" placeholder="Enter the title:">
-                    <p th:if="${#fields.hasErrors('name')}" class="error" th:errors="${product.name}"></p>
+                    <p th:if="${#fields.hasErrors('name')}" class="create-product error" th:errors="${product.name}"></p>
                 </div>
-                <div class="form-group">
+                <div class="form-group create-product">
                     <label for="price">Price:</label>
                     <input type="number" step="0.01" min="0" id="price" th:field="*{price}" placeholder="Enter the price">
-                    <p th:if="${#fields.hasErrors('price')}" class="error" th:errors="${product.price}"></p>
+                    <p th:if="${#fields.hasErrors('price')}" class="create-product error" th:errors="${product.price}"></p>
                 </div>
-                <div class="form-group">
+                <div class="form-group create-product">
                     <label for="category">Category:</label>
                     <select id="category" th:field="*{category}">
                         <option th:default th:value=null>Choose a category</option>
                         <option th:value="brooches">Brooches</option>
                         <option th:value="tourniquets">Tourniquets</option>
                     </select>
-                    <p th:if="${#fields.hasErrors('category')}" class="error" th:errors="${product.category}"></p>
+                    <p th:if="${#fields.hasErrors('category')}" class="create-product error" th:errors="${product.category}"></p>
                 </div>
-                <div class="form-group">
+                <div class="form-group create-product">
                     <label for="image">Image URL:</label>
                     <input type="text" id="image" th:field="*{image}" placeholder="Enter link for the image">
                 </div>
-                <div class="form-group">
+                <div class="form-group create-product">
                     <label for="width">Width:</label>
                     <input type="text" id="width" th:field="*{width}" name="width" placeholder="Width">
                 </div>
-                <div class="form-group">
+                <div class="form-group create-product">
                     <label for="length">Length:</label>
                     <input type="text" id="length" th:field="*{length}" name="length" placeholder="Length">
                 </div>
-                <div class="form-group">
+                <div class="form-group create-product">
                     <label for="material">Material:</label>
                     <input type="text" id="material" th:field="*{material}" name="material" placeholder="Material">
                 </div>
             </div>
             <div class="form__buttons">
-                <button type="submit" class="button">Create</button>
+                <button th:text="${mode == 'edit' ? 'Update':'Create'}" type="submit" class="button"></button>
             </div>
         </form>
     </div>

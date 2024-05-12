@@ -46,7 +46,7 @@
 </nav>
 <div class="container">
     <div class="container__inner lk">
-        <h2 class="subtitle" th:text="${'Hello' + ', ' + user.getUsername()}">Hello</h2>
+        <h2 class="subtitle" th:text="${'Hello' + ', ' + user.getUsername() + '!'}">Hello</h2>
         <div class="user">
             <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="#000000">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -59,10 +59,10 @@
         </div>
         <ul class="contact">
             <li class="contact__item">
-                <span>Email: </span><span th:text="${'email:'+' '+ user.getEmail()}"></span>
+                <span>Email: </span><span th:text="${user.getEmail()}"></span>
             </li>
             <li class="contact__item">
-                <span>Phone number: </span><span th:text="${'tel:'+' '+ user.getPhoneNumber()}"></span>
+                <span>Phone number: </span><span th:text="${user.getPhoneNumber()}"></span>
             </li>
         </ul>
         <form th:action="@{/logout}" method="post">
