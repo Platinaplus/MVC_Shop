@@ -1,10 +1,13 @@
 package ru.marina.shop.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "user_cart")
-public class UserCart {
+@Getter
+@Setter
+public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -20,6 +23,4 @@ public class UserCart {
 
     @Column(name = "quantity", nullable = false)
     private int quantity;
-
-    // Getters and setters
 }

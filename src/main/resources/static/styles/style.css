@@ -446,3 +446,7 @@ button.action__product {
 .details.button {
     width: 100%;
 }
+
+.green {
+    color: #45a049;
+}

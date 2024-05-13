@@ -23,10 +23,13 @@
             <div class="description">
                 <p th:text="${product.name}">Popcorn</p>
                 <p th:text="'&#8364; ' + ${product.price}"></p>
-                <form th:action="@{'catalog/add-to-card/' + ${product.itemId}}" method="post">
+                <div th:if="${cart.contains(product)}">
+                    <p class="green">In cart</p>
+                </div>
+                <form th:if="${!cart.contains(product)}" th:action="@{'/cart/add?productId=' + ${product.itemId}}" method="post">
                     <input class="action__product" type="submit" value="Add to cart">
                 </form>
-                <form th:action="@{'catalog/like/' + ${product.itemId}}" method="post">
+                <form th:action="@{'/favorites/like?productId=' + ${product.itemId}}" method="post">
                     <button class="action__product" type="submit">
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>

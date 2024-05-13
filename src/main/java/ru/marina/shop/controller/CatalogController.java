@@ -9,7 +9,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.marina.shop.entity.Product;
 import ru.marina.shop.entity.Role;
+import ru.marina.shop.entity.User;
+import ru.marina.shop.repository.CartRepository;
 import ru.marina.shop.service.ProductService;
+import ru.marina.shop.service.UserService;
 
 import java.util.List;
 
@@ -18,9 +21,13 @@ import java.util.List;
 public class CatalogController {
 
     private final ProductService productService;
+    private final CartRepository cartRepository;
+    private final UserService userService;
 
-    public CatalogController(ProductService productService) {
+    public CatalogController(ProductService productService, CartRepository cartRepository, UserService userService) {
         this.productService = productService;
+        this.cartRepository = cartRepository;
+        this.userService = userService;
     }
 
     @GetMapping({""})
@@ -30,33 +37,37 @@ public class CatalogController {
     }
 
     @GetMapping("/brooches")
-    public String getBrooches(Model model) {
+    public String getBrooches(Model model, List<Product> cart) {
 
         List<Product> products = productService.getProductsByCategory("brooches");
 
         model.addAttribute("category", "brooches");
         model.addAttribute("products", products);
+        model.addAttribute("cart", cart);
+
         return "products";
     }
 
     @GetMapping("/tourniquets")
-    public String getTourniquets(Model model) {
+    public String getTourniquets(Model model, List<Product> cart) {
 
         List<Product> products = productService.getProductsByCategory("tourniquets");
 
         model.addAttribute("category", "tourniquets");
         model.addAttribute("products", products);
+        model.addAttribute("cart", cart);
 
         return "products";
     }
 
     @GetMapping("/all")
-    public String getAllProducts(Model model) {
+    public String getAllProducts(Model model, List<Product> cart) {
 
         List<Product> products = productService.getAllProducts(Sort.by(Sort.Direction.DESC, "itemId"));
 
         model.addAttribute("products", products);
         model.addAttribute("category", "all");
+        model.addAttribute("cart", cart);
 
         return "products";
     }
@@ -150,5 +161,12 @@ public class CatalogController {
     public Boolean isAdmin() {
         String login = SecurityContextHolder.getContext().getAuthentication().getName();
         return login.equals(Role.ADMIN.name());
+    }
+
+    @ModelAttribute
+    public List<Product> cart() {
+        String login = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.findByName(login);
+        return cartRepository.getCartByUserId(user);
     }
 }
