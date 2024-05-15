@@ -28,7 +28,7 @@
         </svg>
       </a>
     </li>
-    <li><a class="menu__link" th:href="@{#}">
+    <li th:if="${category != 'favorites'}"><a class="menu__link" th:href="@{/favorites}">
       <svg class="heart" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -38,7 +38,7 @@
         </g>
       </svg>
     </a></li>
-    <li><a class="menu__link" th:href="@{/cart}">
+    <li th:if="${category != 'cart'}"><a class="menu__link" th:href="@{/cart}">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>

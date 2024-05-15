@@ -11,6 +11,8 @@ import ru.marina.shop.entity.Product;
 import ru.marina.shop.entity.Role;
 import ru.marina.shop.entity.User;
 import ru.marina.shop.repository.CartRepository;
+import ru.marina.shop.service.CartService;
+import ru.marina.shop.service.FavoritesService;
 import ru.marina.shop.service.ProductService;
 import ru.marina.shop.service.UserService;
 
@@ -21,13 +23,15 @@ import java.util.List;
 public class CatalogController {
 
     private final ProductService productService;
-    private final CartRepository cartRepository;
     private final UserService userService;
+    private final CartService cartService;
+    private final FavoritesService favoritesService;
 
-    public CatalogController(ProductService productService, CartRepository cartRepository, UserService userService) {
+    public CatalogController(ProductService productService, UserService userService, CartService cartService, FavoritesService favoritesService) {
         this.productService = productService;
-        this.cartRepository = cartRepository;
         this.userService = userService;
+        this.cartService = cartService;
+        this.favoritesService = favoritesService;
     }
 
     @GetMapping({""})
@@ -37,47 +41,54 @@ public class CatalogController {
     }
 
     @GetMapping("/brooches")
-    public String getBrooches(Model model, List<Product> cart) {
+    public String getBrooches(Model model, @ModelAttribute("cart") List<Product> cart, @ModelAttribute("favorites") List<Product> favorites) {
 
         List<Product> products = productService.getProductsByCategory("brooches");
 
         model.addAttribute("category", "brooches");
         model.addAttribute("products", products);
         model.addAttribute("cart", cart);
+        model.addAttribute("favorites", favorites);
 
         return "products";
     }
 
     @GetMapping("/tourniquets")
-    public String getTourniquets(Model model, List<Product> cart) {
+    public String getTourniquets(Model model, @ModelAttribute("cart") List<Product> cart, @ModelAttribute("favorites") List<Product> favorites) {
 
         List<Product> products = productService.getProductsByCategory("tourniquets");
 
         model.addAttribute("category", "tourniquets");
         model.addAttribute("products", products);
         model.addAttribute("cart", cart);
+        model.addAttribute("favorites", favorites);
 
         return "products";
     }
 
     @GetMapping("/all")
-    public String getAllProducts(Model model, List<Product> cart) {
+    public String getAllProducts(Model model, @ModelAttribute("cart") List<Product> cart, @ModelAttribute("favorites") List<Product> favorites) {
 
         List<Product> products = productService.getAllProducts(Sort.by(Sort.Direction.DESC, "itemId"));
 
         model.addAttribute("products", products);
         model.addAttribute("category", "all");
         model.addAttribute("cart", cart);
+        model.addAttribute("favorites", favorites);
 
         return "products";
     }
 
     @GetMapping("/product")
-    public String getProduct(Model model, @RequestParam Long id) {
+    public String getProduct(Model model, @RequestParam Long id, @ModelAttribute("cart") List<Product> cart, @ModelAttribute("favorites") List<Product> favorites) {
 
         Product product = productService.getProductById(id);
+        Boolean isInCart = cart.contains(product);
+        Boolean isFavorite = favorites.contains(product);
 
         model.addAttribute("product", product);
+        model.addAttribute("isInCart", isInCart);
+        model.addAttribute("isFavorite", isFavorite);
 
         return "product-details";
     }
@@ -157,16 +168,18 @@ public class CatalogController {
         return "redirect:/catalog/all";
     }
 
-    @ModelAttribute
-    public Boolean isAdmin() {
+    private User getCurrentUser() {
         String login = SecurityContextHolder.getContext().getAuthentication().getName();
-        return login.equals(Role.ADMIN.name());
+        return userService.findByName(login);
     }
 
-    @ModelAttribute
+    @ModelAttribute("cart")
     public List<Product> cart() {
-        String login = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user = userService.findByName(login);
-        return cartRepository.getCartByUserId(user);
+        return cartService.getCart(getCurrentUser());
+    }
+
+    @ModelAttribute("favorites")
+    public List<Product> favorites() {
+        return favoritesService.getFavorites(getCurrentUser());
     }
 }

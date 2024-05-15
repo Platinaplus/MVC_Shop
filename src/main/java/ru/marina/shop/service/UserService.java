@@ -1,5 +1,6 @@
 package ru.marina.shop.service;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -32,6 +33,11 @@ public class UserService implements UserDetailsService {
 
     public List<User> allUsers() {
         return userRepository.findAll();
+    }
+
+    public User getCurrentUser() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepository.findByUsername(username);
     }
 
     public void addUser(User user) {

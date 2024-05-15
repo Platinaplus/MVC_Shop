@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:insert="~{parts/catalog-header :: catalog-header(category='order')}"></div>
+<div class="container">
+    <div class="container__inner cart">
+        <h2>Success!</h2>
+    </div>
+</div>
+
+</body>
+</html>

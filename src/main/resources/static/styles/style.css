@@ -68,6 +68,12 @@ h2 {
     margin: 0 auto;
 }
 
+.container__inner.cart {
+    align-items: center;
+    padding-top: 100px;
+    position: relative;
+}
+
 .container__catalog, .container__details {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -240,6 +246,10 @@ nav.catalog {
     background-color: #45a049; /* Button background color when hovering */
 }
 
+.button.cart {
+    margin-left: auto;
+}
+
 .form {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -374,12 +384,13 @@ label {
 .action__product svg {
     width: 30px;
     height: 30px;
-}
-
-button.action__product {
     position: absolute;
     right: 20px;
     bottom: 25px;
+}
+
+.action__product.favorite {
+    cursor: default;
 }
 
 .description {
@@ -441,12 +452,66 @@ button.action__product {
     row-gap: 20px;
     background-color: #cccccc;
     padding: 30px;
-}
-
-.details.button {
-    width: 100%;
+    position: relative;
 }
 
 .green {
     color: #45a049;
+}
+
+.icons {
+    display: flex;
+    column-gap: 45px;
+    justify-content: flex-end;
+}
+
+.icons svg{
+    width: 45px;
+    height: 45px;
+}
+
+.table__container {
+    width: 80%;
+}
+
+.icon {
+    padding-bottom: 20px;
+}
+
+.icon svg {
+    width: 55px;
+    height: 55px;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 20px;
+    border: 1px solid #767373;
+    border-collapse: collapse;
+}
+.table th {
+    font-weight: bold;
+    font-size: 20px;
+    padding: 8px;
+    background: #efefef;
+    border: 1px solid #767373;
+}
+.table td {
+    border: 1px solid #767373;
+    padding: 8px;
+    text-align: center;
+}
+
+.table td.title {
+    font-weight: bold;
+}
+
+.table svg {
+    width: 20px;
+    height: 20px;
+}
+
+.table input {
+    width: 100px;
+    height: 30px;
 }

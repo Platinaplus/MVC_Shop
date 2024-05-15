@@ -3,6 +3,7 @@ package ru.marina.shop.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
@@ -18,7 +19,8 @@ public class User implements UserDetails {
     private Long userId;
 
     @NotEmpty(message = "The name is required")
-    @Column(name = "username", nullable = false)
+    @UniqueElements(message = "This name already exists. Please, try an other one.")
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
     @NotEmpty(message = "The password is required")
@@ -26,6 +28,7 @@ public class User implements UserDetails {
     private String password;
 
     @NotEmpty(message = "The email is required")
+    @UniqueElements(message = "This email already registered.")
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 

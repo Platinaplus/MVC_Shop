@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:insert="~{parts/catalog-header :: catalog-header(category='cart')}"></div>
+<div class="container">
+    <div class="container__inner cart">
+        <div class="table__container">
+            <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path d="M6.29977 5H21L19 12H7.37671M20 16H8L6 3H3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z"
+                              stroke="#45a049" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </g>
+                </svg>
+            </div>
+            <form th:action="@{/order}" method="post" th:object="${order}">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="cart: ${carts}">
+                        <td class="title">
+                            <input th:hidden="true" type="text" th:name="id" th:value="${cart.id}" >
+                            <label th:for="name" th:text="${cart.product.name}">
+                                <input th:readonly="true" th:name="name" th:field="*{carts}"
+                                       th:value="${cart.product.itemId}" type="text">
+                            </label>
+                        </td>
+                        <td>
+<!--                            <label th:for="quantity" th:text="${cart.getQuantity()}">-->
+<!--                                <input type="number" name="quantity" th:field="*{carts}"-->
+<!--                                       th:value="${cart.getQuantity()}"/>-->
+<!--                            </label>-->
+                                <input type="number" th:name="quantity" th:field="*{carts}"
+                                       th:value="${cart.quantity}"/>
+                        </td>
+                        <td th:text="'&#8364; '+${cart.product.price}"></td>
+                        <td>
+                            <a th:href="@{/cart/delete(id=${cart.id})}">
+                                <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg"
+                                     xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                                     class="iconify iconify--twemoji" preserveAspectRatio="xMidYMid meet"
+                                     fill="#000000">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path fill="#DD2E44"
+                                              d="M21.533 18.002L33.768 5.768a2.5 2.5 0 0 0-3.535-3.535L17.998 14.467L5.764 2.233a2.498 2.498 0 0 0-3.535 0a2.498 2.498 0 0 0 0 3.535l12.234 12.234L2.201 30.265a2.498 2.498 0 0 0 1.768 4.267c.64 0 1.28-.244 1.768-.732l12.262-12.263l12.234 12.234a2.493 2.493 0 0 0 1.768.732a2.5 2.5 0 0 0 1.768-4.267L21.533 18.002z"></path>
+                                    </g>
+                                </svg>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <button type="submit" class="button cart">Confirm</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -26,10 +26,30 @@ CREATE TABLE user_cart
 (
     id       SERIAL PRIMARY KEY,
     user_id  INT REFERENCES users (user_id) NOT NULL,
-    item_id  INT REFERENCES products (product_id) NOT NULL,
-    quantity INT                            NOT NULL,
+    item_id  INT REFERENCES products (item_id) NOT NULL,
+    quantity INT NOT NULL,
     CONSTRAINT fk_user_cart_user FOREIGN KEY (user_id) REFERENCES users (user_id),
-    CONSTRAINT fk_user_cart_item FOREIGN KEY (item_id) REFERENCES products (product_id)
+    CONSTRAINT fk_user_cart_product FOREIGN KEY (item_id) REFERENCES products (item_id),
+);
+
+CREATE TABLE orders
+(
+    id       SERIAL PRIMARY KEY,
+    order_number VARCHAR(100),
+    carts INT  REFERENCES user_cart (id) NOT NULL,
+    user_id INT REFERENCES users (user_id),
+    purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    CONSTRAINT fk_orders_user_cart FOREIGN KEY (carts) REFERENCES user_cart (id),
+    CONSTRAINT fk_orders_user FOREIGN KEY (user_id) REFERENCES users (user_id)
+);
+
+CREATE TABLE favorites
+(
+    id            SERIAL PRIMARY KEY,
+    user_id       INT REFERENCES users (user_id)      NOT NULL,
+    item_id       INT REFERENCES products (item_id)      NOT NULL,
+    CONSTRAINT fk_favorites_user FOREIGN KEY (user_id) REFERENCES users (user_id),
+    CONSTRAINT fk_favorites_item FOREIGN KEY (item_id) REFERENCES products (item_id)
 );
 
 -- Ñîçäàíèå òàáëèöû èñòîðèè ïîêóïîê
