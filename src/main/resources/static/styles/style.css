@@ -500,6 +500,7 @@ label {
     border: 1px solid #767373;
     padding: 8px;
     text-align: center;
+    height: 53px;
 }
 
 .table td.title {

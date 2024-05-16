@@ -23,4 +23,8 @@ public class Cart {
 
     @Column(name = "quantity", nullable = false)
     private int quantity;
+
+    @ManyToOne
+    @JoinColumn
+    private Order order;
 }

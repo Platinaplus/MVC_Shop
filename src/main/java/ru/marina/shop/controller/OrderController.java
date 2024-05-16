@@ -1,13 +1,10 @@
 package ru.marina.shop.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.marina.shop.entity.Cart;
-import ru.marina.shop.entity.Order;
-import ru.marina.shop.entity.Product;
-import ru.marina.shop.entity.User;
+import ru.marina.shop.entity.*;
+import ru.marina.shop.entity.dto.OrderCreationDto;
 import ru.marina.shop.service.CartService;
 import ru.marina.shop.service.OrderService;
 import ru.marina.shop.service.ProductService;
@@ -17,7 +14,6 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Calendar;
-import java.util.List;
 
 @Controller
 @RequestMapping("/order")
@@ -36,26 +32,27 @@ public class OrderController {
     }
 
     @PostMapping("")
-    public String newOrder(Model model, @ModelAttribute("order") Order order) {
+    public String newOrder(Model model, @ModelAttribute OrderCreationDto order) {
 
-        System.out.println(order);
+        System.out.println(order.getCart());
 
-//        String day = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
-//        Timestamp date = Timestamp.from(Instant.now());
-//        User user = userService.getCurrentUser();
-//
-//
-//        order.setOrderNumber(day+'-'+user.getUserId());
-//        order.setPurchaseDate(date);
-//        orderService.saveOrder(order);
-//
-//
-//        order.getCarts().forEach(cart -> {
-//            cartService.deleteFromCart(cart.getId());
-//        });
-//
-//
-//        model.addAttribute("orderNumber", day+'-'+user.getUserId());
+        String day = new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime());
+        Timestamp date = Timestamp.from(Instant.now());
+        User user = userService.getCurrentUser();
+        Order newOrder = new Order();
+        newOrder.setOrderNumber(day+'-'+user.getUserId());
+        newOrder.setPurchaseDate(date);
+        newOrder.setUser_id(user);
+        newOrder.setStatus(Status.CREATED);
+        newOrder.setCarts(order.getCart());
+
+        orderService.saveOrder(newOrder);
+
+        order.getCart().forEach(cart -> {
+            cartService.deleteFromCart(cart.getId());
+        });
+
+        model.addAttribute("orderNumber", day+'-'+user.getUserId());
 
         return "redirect:/order/success";
     }

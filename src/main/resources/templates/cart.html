@@ -9,7 +9,9 @@
 <div th:insert="~{parts/catalog-header :: catalog-header(category='cart')}"></div>
 <div class="container">
     <div class="container__inner cart">
-        <div class="table__container">
+        <h2 th:if="${order.getCart().size() == 0}">The cart is empty</h2>
+
+        <div th:if="${order.getCart().size() > 0}" class="table__container">
             <div class="icon">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -31,23 +33,20 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="cart: ${carts}">
+                    <tr th:each="cart, itemStat: *{cart}">
+
                         <td class="title">
-                            <input th:hidden="true" type="text" th:name="id" th:value="${cart.id}" >
-                            <label th:for="name" th:text="${cart.product.name}">
-                                <input th:readonly="true" th:name="name" th:field="*{carts}"
-                                       th:value="${cart.product.itemId}" type="text">
-                            </label>
+
+                            <p th:text="${cart.getProduct().getName()}"></p>
                         </td>
                         <td>
-<!--                            <label th:for="quantity" th:text="${cart.getQuantity()}">-->
-<!--                                <input type="number" name="quantity" th:field="*{carts}"-->
-<!--                                       th:value="${cart.getQuantity()}"/>-->
-<!--                            </label>-->
-                                <input type="number" th:name="quantity" th:field="*{carts}"
-                                       th:value="${cart.quantity}"/>
+                            <input th:hidden="true" th:field="*{cart[__${itemStat.index}__].id}"/>
+                            <input th:hidden="true" th:field="*{cart[__${itemStat.index}__].product.name}"/>
+                            <input class="price" th:hidden="true"
+                                   th:field="*{cart[__${itemStat.index}__].product.price}"/>
+                            <input class="quantity" type="number" th:field="*{cart[__${itemStat.index}__].quantity}"/>
                         </td>
-                        <td th:text="'&#8364; '+${cart.product.price}"></td>
+                        <td th:text="'&#8364;'+ ${cart.getProduct().getPrice()}"></td>
                         <td>
                             <a th:href="@{/cart/delete(id=${cart.id})}">
                                 <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg"
@@ -64,14 +63,63 @@
                             </a>
                         </td>
                     </tr>
+                    <tr>
+                        <td class="title">Total:</td>
+                        <td class="sum_q"></td>
+                        <td class="sum"></td>
+                        <td></td>
+                    </tr>
                     </tbody>
                 </table>
-
                 <button type="submit" class="button cart">Confirm</button>
             </form>
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", (event) => {
+        console.log("DOM fully loaded and parsed")
+
+        const countSum = () => {
+            const p = document.querySelectorAll(".price")
+            if (p.length === 0) {
+                return
+            }
+            const qt = document.querySelectorAll(".quantity")
+
+            let sum = 0;
+            let sumQ = 0;
+
+            for (let i of p) {
+                const q = i.nextElementSibling
+                const quantity = q.value
+                const price = Number(i.value)
+
+                sum += +quantity * price
+            }
+
+            for (let i of qt) {
+                sumQ += Number(i.value)
+            }
+
+            document.querySelector(".sum").innerHTML = new Intl.NumberFormat('en-IN', {
+                style: 'currency',
+                currency: 'EUR'
+            }).format(
+                sum,
+            )
+
+            document.querySelector(".sum_q").innerHTML = sumQ.toString()
+        }
+        countSum();
+
+        const q = document.querySelectorAll(".quantity")
+        for (let el of q) {
+            el.addEventListener("change", countSum)
+        }
+    })
+</script>
 
 </body>
 </html>

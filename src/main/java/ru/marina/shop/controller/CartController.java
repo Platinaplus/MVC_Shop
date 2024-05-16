@@ -5,12 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.marina.shop.entity.Cart;
-import ru.marina.shop.entity.Order;
 import ru.marina.shop.entity.Product;
 import ru.marina.shop.entity.User;
-import ru.marina.shop.entity.dto.ProductDto;
-import ru.marina.shop.repository.CartRepository;
+import ru.marina.shop.entity.dto.OrderCreationDto;
 import ru.marina.shop.service.CartService;
+import ru.marina.shop.service.OrderService;
 import ru.marina.shop.service.ProductService;
 import ru.marina.shop.service.UserService;
 
@@ -32,9 +31,10 @@ public class CartController {
 
     @GetMapping("")
     public String showCart(Model model, @ModelAttribute("currentUser") User currentUser) {
-        Order order = new Order();
+        OrderCreationDto order = new OrderCreationDto();
         List<Cart> carts = cartService.getCarts(currentUser);
-        model.addAttribute("carts", carts);
+        carts.forEach(order::addCart);
+
         model.addAttribute("order", order);
 
         return "cart";

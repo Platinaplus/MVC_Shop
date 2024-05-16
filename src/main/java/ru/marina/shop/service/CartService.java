@@ -1,14 +1,12 @@
 package ru.marina.shop.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.marina.shop.entity.Cart;
 import ru.marina.shop.entity.Product;
 import ru.marina.shop.entity.User;
 import ru.marina.shop.entity.dto.ProductDto;
 import ru.marina.shop.repository.CartRepository;
-import ru.marina.shop.repository.ProductRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,10 +33,10 @@ public class CartService {
 
     public List<Cart> getCarts(User user) {return cartRepository.getCartByUser(user);}
 
-    public Cart editCart(User user, Product product, int quantity) {
+    public void editCart(User user, Product product, int quantity) {
         Cart cart = cartRepository.getCartByProduct(user, product);
         cart.setQuantity(quantity);
-        return cartRepository.save(cart);
+        cartRepository.save(cart);
     }
 
     public void addToCard(Cart cart) {
