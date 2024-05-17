@@ -1,6 +1,7 @@
 package ru.marina.shop.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import org.hibernate.validator.constraints.UniqueElements;
@@ -19,7 +20,6 @@ public class User implements UserDetails {
     private Long userId;
 
     @NotEmpty(message = "The name is required")
-    @UniqueElements(message = "This name already exists. Please, try an other one.")
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 
@@ -28,7 +28,7 @@ public class User implements UserDetails {
     private String password;
 
     @NotEmpty(message = "The email is required")
-    @UniqueElements(message = "This email already registered.")
+    @Email(message = "Email is not valid")
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
@@ -40,6 +40,9 @@ public class User implements UserDetails {
 
     @Transient
     private String confirmPassword;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "user_id")
+    private List<Order> orders;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

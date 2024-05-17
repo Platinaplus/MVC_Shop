@@ -62,6 +62,14 @@ public class CartController {
         return "cart";
     }
 
+    @GetMapping("/delete")
+    public String deleteProduct( @RequestParam Long id, HttpServletRequest request) {
+
+        cartService.deleteFromCart(id);
+
+        return "redirect:" + request.getHeader("referer");
+    }
+
     @ModelAttribute("currentUser")
     public User getUser() {
         return userService.getCurrentUser();

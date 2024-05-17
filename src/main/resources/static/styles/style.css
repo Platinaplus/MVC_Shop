@@ -363,7 +363,7 @@ label {
     grid-area: error;
 }
 
-.action__product {
+.action__product, .action__favorite {
     background-color: transparent;
     color: white;
     border: none;
@@ -373,7 +373,11 @@ label {
     transition: .3s;
 }
 
-.action__product:hover {
+.action__favorite {
+    color: black;
+}
+
+.action__product:hover, .action__favorite:hover {
     color: #45a049;
 }
 

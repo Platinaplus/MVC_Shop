@@ -31,7 +31,7 @@ public class Order {
     @JoinColumn(name = "user_id", nullable = false)
     private User user_id;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<Cart> carts = new ArrayList<>();
 
     @Column(name="status")

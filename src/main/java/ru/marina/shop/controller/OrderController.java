@@ -7,7 +7,6 @@ import ru.marina.shop.entity.*;
 import ru.marina.shop.entity.dto.OrderCreationDto;
 import ru.marina.shop.service.CartService;
 import ru.marina.shop.service.OrderService;
-import ru.marina.shop.service.ProductService;
 import ru.marina.shop.service.UserService;
 
 import java.sql.Timestamp;
@@ -20,13 +19,11 @@ import java.util.Calendar;
 public class OrderController {
 
     private final CartService cartService;
-    private final ProductService productService;
     private final UserService userService;
     private final OrderService orderService;
 
-    public OrderController(CartService cartService, ProductService productService, UserService userService, OrderService orderService) {
+    public OrderController(CartService cartService, UserService userService, OrderService orderService) {
         this.cartService = cartService;
-        this.productService = productService;
         this.userService = userService;
         this.orderService = orderService;
     }
@@ -51,8 +48,6 @@ public class OrderController {
         order.getCart().forEach(cart -> {
             cartService.deleteFromCart(cart.getId());
         });
-
-        model.addAttribute("orderNumber", day+'-'+user.getUserId());
 
         return "redirect:/order/success";
     }

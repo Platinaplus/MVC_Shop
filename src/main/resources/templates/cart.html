@@ -9,9 +9,9 @@
 <div th:insert="~{parts/catalog-header :: catalog-header(category='cart')}"></div>
 <div class="container">
     <div class="container__inner cart">
-        <h2 th:if="${order.getCart().size() == 0}">The cart is empty</h2>
+        <h2 th:if="${order == null || order.getCart().size() == 0}">The cart is empty</h2>
 
-        <div th:if="${order.getCart().size() > 0}" class="table__container">
+        <div th:if="${order != null && order.getCart().size() > 0}" class="table__container">
             <div class="icon">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>

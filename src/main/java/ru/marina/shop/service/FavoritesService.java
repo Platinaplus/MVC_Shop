@@ -24,8 +24,8 @@ public class FavoritesService {
         favoritesRepository.save(favorite);
     }
 
-    public void deleteFromFavorites(Long id) {
-        favoritesRepository.deleteById(id);
+    public void removeFromFavorites(User user, Product product) {
+        favoritesRepository.removeFromFavorites(user, product);
     }
 
     public void getFavoriteById(Long id) { favoritesRepository.findById(id); }
