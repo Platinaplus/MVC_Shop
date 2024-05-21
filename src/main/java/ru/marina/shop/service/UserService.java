@@ -17,7 +17,7 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     BCryptPasswordEncoder encoder;
 
-    public UserService(UserRepository userRepository, UserRepository userRepository1) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
         encoder = new BCryptPasswordEncoder(16);
     }

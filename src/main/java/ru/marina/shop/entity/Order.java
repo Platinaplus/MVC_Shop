@@ -5,9 +5,7 @@ import lombok.*;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Data
 @Entity
@@ -28,11 +26,12 @@ public class Order {
     private Timestamp purchaseDate;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user_id;
+    @JoinColumn(name="user_id")
+    private User userId;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<Cart> carts = new ArrayList<>();
+    @OneToMany
+    @JoinColumn
+    private List<Cart> cart = new ArrayList<>();
 
     @Column(name="status")
     private Status status;

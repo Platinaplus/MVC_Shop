@@ -9,7 +9,6 @@ import ru.marina.shop.entity.Product;
 import ru.marina.shop.entity.User;
 import ru.marina.shop.entity.dto.OrderCreationDto;
 import ru.marina.shop.service.CartService;
-import ru.marina.shop.service.OrderService;
 import ru.marina.shop.service.ProductService;
 import ru.marina.shop.service.UserService;
 

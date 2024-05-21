@@ -24,7 +24,6 @@ public class Cart {
     @Column(name = "quantity", nullable = false)
     private int quantity;
 
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn
-    private Order order;
+    @Column(name="ordered")
+    private boolean ordered;
 }

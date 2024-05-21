@@ -13,6 +13,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Calendar;
+import java.util.List;
 
 @Controller
 @RequestMapping("/order")
@@ -31,22 +32,27 @@ public class OrderController {
     @PostMapping("")
     public String newOrder(Model model, @ModelAttribute OrderCreationDto order) {
 
-        System.out.println(order.getCart());
-
         String day = new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime());
         Timestamp date = Timestamp.from(Instant.now());
         User user = userService.getCurrentUser();
         Order newOrder = new Order();
-        newOrder.setOrderNumber(day+'-'+user.getUserId());
+        newOrder.setOrderNumber(day + '-' + user.getUserId());
         newOrder.setPurchaseDate(date);
-        newOrder.setUser_id(user);
+        newOrder.setUserId(user);
         newOrder.setStatus(Status.CREATED);
-        newOrder.setCarts(order.getCart());
+        newOrder.setCart(order.getCart());
 
         orderService.saveOrder(newOrder);
 
-        order.getCart().forEach(cart -> {
-            cartService.deleteFromCart(cart.getId());
+        List<Cart> userCart = cartService.getCarts(user);
+        userCart.forEach(cart -> {
+            order.getCart().forEach(orderCart -> {
+                if (cart.getId().equals(orderCart.getId())) {
+                    cart.setOrdered(true);
+                    cart.setQuantity(orderCart.getQuantity());
+                    cartService.addToCard(cart);
+                }
+            });
         });
 
         return "redirect:/order/success";

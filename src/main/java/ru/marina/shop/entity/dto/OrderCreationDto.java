@@ -19,12 +19,4 @@ public class OrderCreationDto {
     public void addCart(Cart cartItem) {
         this.cart.add(cartItem);
     }
-
-    public Double getSum(OrderCreationDto order) {
-        final double[] sum = {0.0};
-
-        order.getCart().forEach(cart -> sum[0] += (cart.getProduct().getPrice()*cart.getQuantity()));
-
-        return sum[0];
-    }
 }
