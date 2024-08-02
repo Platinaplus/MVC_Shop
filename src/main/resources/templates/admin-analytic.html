@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet" />
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", { packages: ["corechart"] });
+      const getAnalitycs = () => $.getJSON("/get-analytic").then((res) => drawChart(res));
+      google.charts.setOnLoadCallback(getAnalitycs);
+
+      function drawChart(dataFromDb) {
+        const data = google.visualization.arrayToDataTable([
+          ["Element", "Quantity"],
+          ...dataFromDb,
+        ]);
+
+        const view = new google.visualization.DataView(data);
+
+        const options = {
+          title: "Number of orders",
+          width: 800,
+          height: 500,
+          bar: { groupWidth: "95%" },
+          legend: { position: "none" },
+        };
+        const chart = new google.visualization.ColumnChart(document.getElementById("columnchart"));
+        chart.draw(view, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div th:insert="~{parts/admin-header :: admin-header(category='analytic')}"></div>
+    <div class="container">
+      <div class="container__analytics">
+        <div id="columnchart"></div>
+      </div>
+    </div>
+  </body>
+</html>

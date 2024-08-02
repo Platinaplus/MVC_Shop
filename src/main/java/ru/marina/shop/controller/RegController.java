@@ -28,16 +28,19 @@ public class RegController {
 
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(error -> System.out.println(error.getDefaultMessage()));
+            model.addAttribute("error_text", "Password is required");
             return "registration";
         }
         if (!confirmPassword.equals(user.getPassword())){
             model.addAttribute("error_text","Passwords do not match");
             return "registration";
         }
+        if(!user.getPassword().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{12,}$")){
+            model.addAttribute("error_text", "Password must contains minimum 12 characters, at least one uppercase letter, one lowercase letter, one number and one special character");
+            return "registration";
+        }
 
         userService.addUser(user);
-
-        //securityService.autoLogin(user.getUsername(), user.getPassword()); // TODO: need to fix this method
 
         return "redirect:/catalog";
     }

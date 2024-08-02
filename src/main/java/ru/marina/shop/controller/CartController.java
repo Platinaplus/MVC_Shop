@@ -47,6 +47,7 @@ public class CartController {
         cart.setUser(currentUser);
         cart.setProduct(product);
         cart.setQuantity(1);
+        cart.setOrdered(false);
 
         cartService.addToCard(cart);
 

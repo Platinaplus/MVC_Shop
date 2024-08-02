@@ -19,6 +19,8 @@ public class CartService {
     }
 
     public List<Cart> getCarts(User user) {return cartRepository.getCartByUser(user);}
+    
+    public List<Cart> getCartsByOrder(String orderNumber) {return cartRepository.getCartByOrder(orderNumber);}
 
     public void editCart(User user, Product product, int quantity) {
         Cart cart = cartRepository.getCartByProduct(user, product);

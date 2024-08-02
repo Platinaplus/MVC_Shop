@@ -25,6 +25,6 @@ public class LkController {
             User user = userRepository.findByUsername(username);
             model.addAttribute("user", user);
         }
-        return "lk"; // HTML page template name
+        return "lk";
     }
 }

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:form="http://www.w3.org/1999/xhtml"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet" />
+  </head>
+  <body>
+    <div
+      th:insert="~{parts/admin-header :: admin-header(category='users')}"
+    ></div>
+    <div class="container">
+      <div class="container__inner cart">
+        <h2 th:if="${users.size() == 0}">There are no users yet</h2>
+
+        <div th:if="${users.size() > 0}">
+          <h2>My Customers</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Customer name</th>
+                <th>Phone number</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="user: ${users}">
+                <td th:text="${user.getUsername()}"></td>
+                <td th:text="${user.getPhoneNumber()}"></td>
+                <td th:text="${user.getEmail()}"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

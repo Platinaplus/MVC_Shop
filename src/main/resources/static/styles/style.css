@@ -99,6 +99,13 @@ h2 {
     align-items: center;
 }
 
+.container__analytics {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
 .content__product {
     background-color: black;
     color: #fff;

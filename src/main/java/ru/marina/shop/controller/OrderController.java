@@ -50,6 +50,7 @@ public class OrderController {
                 if (cart.getId().equals(orderCart.getId())) {
                     cart.setOrdered(true);
                     cart.setQuantity(orderCart.getQuantity());
+                    cart.setOrderNumber(day + '-' + user.getUserId());
                     cartService.addToCard(cart);
                 }
             });

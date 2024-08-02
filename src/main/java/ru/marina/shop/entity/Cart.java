@@ -26,4 +26,7 @@ public class Cart {
 
     @Column(name="ordered")
     private boolean ordered;
+    
+    @Column(name="order_number")
+    private String orderNumber;
 }

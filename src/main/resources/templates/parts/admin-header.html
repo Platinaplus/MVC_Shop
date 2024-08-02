@@ -1,12 +1,12 @@
 <nav th:fragment="admin-header (category)" class="catalog">
   <ul class="menu menu-left">
-    <li th:if="${category != 'analytics'}" class="menu__product"><a class="menu__link" th:href="@{/admin/analytics}">
+    <li th:if="${category != 'analytic'}" class="menu__product"><a class="menu__link" th:href="@{/admin/analytic}">
       Analytics
     </a></li>
     <li th:if="${category != 'orders'}" class="menu__product"><a class="menu__link" th:href="@{/admin/orders}">
       Orders
     </a></li>
-    <li th:if="${category != 'customers'}" class="menu__product"><a class="menu__link" th:href="@{/admin/customers}">
+    <li th:if="${category != 'users'}" class="menu__product"><a class="menu__link" th:href="@{/admin/users}">
       Customers
     </a></li>
   </ul>

@@ -33,7 +33,7 @@
                         </td>
                         <td th:text="${order.userId.getUsername()}"></td>
                         <td th:text="${order.userId.getPhoneNumber()}"></td>
-                        <td th:text="${#temporals.format(localDate, 'dd-MM-yyyy')}"></td>
+                        <td th:text="${#dates.format(order.purchaseDate, 'dd-MMM-yyyy')}"></td>
                         <td th:text="${order.getStatus()}"></td>
                         <td>
                             <a th:if="${order.status.toString() == 'CREATED'}" th:href="@{/admin/orders/delete(id=${order.id})}">
